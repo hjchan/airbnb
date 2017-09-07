@@ -15,7 +15,7 @@ class UsersController < Clearance::UsersController
 
     if @user.save
       sign_in @user
-      redirect_to edit_user_path
+      redirect_to edit_user_path(@user)
     else
       render template: "users/new"
     end
