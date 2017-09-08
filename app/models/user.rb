@@ -2,7 +2,6 @@ class User < ApplicationRecord
   include Clearance::User
   has_many :listings
   has_many :authentications, dependent: :destroy
-  validates :name, presence: true, unless: :a
 
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 	  user = self.create!(
