@@ -6,13 +6,24 @@ class UsersController < Clearance::UsersController
     @user = current_user
   end
 
-  def update
+  def show
+    @user = current_user
+  end
 
+  def update
+    u_params = params[:user]
+    u_params[:birthday] = Date.new(u_params["birthday(1i)"].to_i, u_params["birthday(2i)"].to_i, u_params["birthday(3i)"].to_i)
+    current_user.update_attributes!(update_from_params)
+    redirect_to user_path(current_user)
+  end
+
+  def new
+    @user = User.new
+    render template: "users/new"
   end
 
 	def create
-    @user = user_from_params
-
+    @user = User.new(user_from_params)
     if @user.save
       sign_in @user
       redirect_to edit_user_path(@user)
@@ -24,21 +35,15 @@ class UsersController < Clearance::UsersController
   private
 
   def user_from_params
-    email = user_params.delete(:email)
-    password = user_params.delete(:password)
-    first_name = user_params.delete(:first_name)
-    last_name = user_params.delete(:last_name)
+    params.require(:user).permit(:email, :password, :first_name, :last_name)
+  end
 
-    Clearance.configuration.user_model.new(user_params).tap do |user|
-      user.email = email
-      user.password = password
-      user.first_name = first_name
-      user.last_name = last_name
-    end
+  def update_from_params
+    params.require(:user).permit(:first_name, :last_name, :phone, :country, :gender, :birthday)
   end
 
   def check_user
-    unless current_user.id == params[:id]
+    unless current_user.id == params[:id].to_i
       redirect_to root_path
     end
   end
