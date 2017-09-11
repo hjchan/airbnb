@@ -24,6 +24,8 @@ class UsersController < Clearance::UsersController
 
 	def create
     @user = User.new(user_from_params)
+    @user.picture.default_url
+    byebug
     if @user.save
       sign_in @user
       redirect_to edit_user_path(@user)
@@ -39,7 +41,7 @@ class UsersController < Clearance::UsersController
   end
 
   def update_from_params
-    params.require(:user).permit(:name, :phone, :country, :gender, :birthday)
+    params.require(:user).permit(:name, :phone, :country, :gender, :birthday, :picture)
   end
 
   def check_user

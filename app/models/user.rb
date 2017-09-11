@@ -2,16 +2,13 @@ class User < ApplicationRecord
   include Clearance::User
   has_many :listings
   has_many :authentications, dependent: :destroy
+  mount_uploader :picture, UserProfileUploader
 
 	def self.create_with_auth_and_hash(authentication, auth_hash)
 	  user = self.create!(
 	    name: auth_hash[:info][:name],
 	    email: auth_hash[:extra][:raw_info][:email],
 	    password: SecureRandom.hex(6)
-	    # birthday: 
-	    # phone: 
-	    # gender: auth_hash["extra"]["raw_info"]["gender"]
-	    # country:
 	  )
 	  user.authentications << authentication
 	  return user

@@ -1,4 +1,4 @@
-<%= form_for @user do |form| %>
+<%= form_for @user, html: { multipart: true } do |form| %>
 	<div class="form-group row">
     <%= form.label :name, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-4">
@@ -39,6 +39,15 @@
     <div class="col-sm-3">
       <%= date_select :user, :birthday, {}, {class: "form-control"} %>
     </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :picture, class: "" %>
+    <div>
+      <%= image_tag(@user.picture_url, id: "image-edit") %>
+    </div>
+    <%= form.file_field :picture, class: "form-control-file", onchange: "previewFile()" %>
+    <%= form.hidden_field :picture_cache %>
   </div>
 
   <div class="submit-field">
