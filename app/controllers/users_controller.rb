@@ -24,8 +24,7 @@ class UsersController < Clearance::UsersController
 
 	def create
     @user = User.new(user_from_params)
-    @user.picture.default_url
-    byebug
+    # @user.picture.default_url
     if @user.save
       sign_in @user
       redirect_to edit_user_path(@user)

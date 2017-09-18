@@ -8,7 +8,10 @@ class User < ApplicationRecord
 	  user = self.create!(
 	    name: auth_hash[:info][:name],
 	    email: auth_hash[:extra][:raw_info][:email],
-	    password: SecureRandom.hex(6)
+	    password: SecureRandom.hex(6),
+      birthday: DateTime.strptime(auth_hash[:extra][:raw_info][:birthday], '%m/%d/%Y'),
+      gender: auth_hash[:extra][:raw_info][:gender].capitalize,
+      remote_picture_url: auth_hash[:info][:image]
 	  )
 	  user.authentications << authentication
 	  return user
