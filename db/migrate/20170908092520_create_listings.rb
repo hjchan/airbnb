@@ -10,6 +10,7 @@ class CreateListings < ActiveRecord::Migration[5.1]
       t.string :state
       t.string :city
       t.integer :zipcode
+      t.string :address
       t.integer :price
       t.string :description
       t.belongs_to :user

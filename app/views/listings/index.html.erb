@@ -1,0 +1,6 @@
+<% if @listings %>
+  <% for listing in @listings %>
+    <p>hello world</p>
+    <%= link_to listing.id, user_listing_path(listing.user, listing) %>
+  <% end %>
+<% end %>

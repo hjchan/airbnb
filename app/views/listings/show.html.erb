@@ -1,0 +1,11 @@
+<p><%= @listing.name %></p>
+<% if @listing.pictures? %>
+  <% for item in @listing.pictures %>
+    <%= image_tag(item) %>
+  <% end %>
+<% end %>
+<% if current_user.id == @listing.user_id %>
+  <%= link_to 'Update', edit_user_listing_path(current_user, @listing), {class: "btn btn-primary"} %>
+  <%= link_to 'Destroy', user_listing_path(current_user, @listing),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+<% end %>

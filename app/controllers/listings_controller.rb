@@ -1,46 +1,70 @@
 class ListingsController < ApplicationController
 
+  # GET    /listings(.:format)  
+  # GET    /users/:user_id/listings(.:format)
 	def index
-		@listing = Listing.all
+    if params[:user_id]
+      user = User.find(params[:user_id])
+      @listings = user.listings
+    else
+  		@listings = Listing.all
+    end
 	end
 
+  # GET    /users/:user_id/listings/:id(.:format) 
 	def show
-		@listing = Listing.find(params[:id])
+    user = User.find(params[:user_id])
+		@listing = user.listings.find(params[:id])
 	end
 
+  # GET    /users/:user_id/listings/new(.:format)   
 	def new
-		@lsting = Listing.new
+    if signed_in?
+		  @listing = current_user.listings.new
+    else
+      flash[:notice] = "Please sign in before create listing."
+      redirect_to sign_in_path
+    end
 	end
 
+  # POST   /users/:user_id/listings(.:format) 
 	def create
-		params[:listing][user_id] = current_user.id
-		@listing = Listing.new(listing_from_params)
+		@listing = current_user.listings.new(listing_from_params)
 		if @listing.save
-			redirect_to edit_listing_path(@listing)
+			redirect_to user_listing_path(current_user, @listing)
 		else
-			render template: "listing/new"
+			render "new"
 		end
 	end
 
+  # GET    /users/:user_id/listings/:id/edit(.:format)
 	def edit
-		@listing = Listing.find(params[:id])
+    byebug
+    if signed_in? && (current_user.id == params[:user_id].to_i)
+  		@listing = current_user.listings.find(params[:id])
+    else
+      flash[:notice] = "Please sign in before edit listing."
+      redirect_to sign_in_path
+    end
 	end
 
+  # PATCH  /users/:user_id/listings/:id(.:format) 
 	def update
-		@listing = Listing.find(params[:id])
+		@listing = current_user.listings.find(params[:id])
 		if current_user.id = @listing.user_id
 			@listing.update_attributes!(listing_from_params)
-			redirect_to listing_path(@listing)
+			redirect_to user_listing_path(current_user, @listing)
 		else
 			redirect_to root
 		end
 	end 
 
-	def delete
-		@listing = Listing.find(params[:id])
+  # DELETE /users/:user_id/listings/:id(.:format)  
+	def destroy
+    @listing = current_user.listings.find(params[:id])
 		if current_user.id = @listing.user_id
 			@listing.destroy
-			redirect_to user_path(current_user)
+			redirect_to user_listing_path(current_user, @listing)
 		else
 			redirect_to root
 		end
@@ -49,7 +73,7 @@ class ListingsController < ApplicationController
 	private
 
 	def listing_from_params
-		params.require(:listing).permit(:name, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :price, :description, :user_id)
+		params.require(:listing).permit(:name, :property_type, :room_number, :bed_number, :guest_number, :country, :state, :city, :zipcode, :address, :price, :description, :user_id, {pictures: []})
 	end
 
 end

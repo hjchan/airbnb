@@ -7,7 +7,13 @@ class UsersController < Clearance::UsersController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user
+      return @user
+    else
+      flash[:notice] = "User not found"
+      redirect_to root_path
+    end
   end
 
   def update

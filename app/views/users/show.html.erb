@@ -1,2 +1,3 @@
 <p> <%= @user.email %> </p>
 <%= image_tag(@user.picture_url) if @user.picture? %>
+<%= link_to "Listings", user_listings_path(@user) %> 

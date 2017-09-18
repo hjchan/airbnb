@@ -1,0 +1,89 @@
+	<div class="form-group row">
+    <%= form.label :name, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :property_type, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-3">
+      <%= form.select(:property_type, ["House", "Entire Floor", "Condominium", "Villa", "Townhouse", "Castle", "Treehouse", "Igloo", "Yurt", "Cave", "Chalet", "Hut", "Tent", "Other"], {}, {class: "form-control"}) %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :room_number, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-3">
+      <%= form.select(:room_number, [0,1,2,3,4,5], {}, {class: "form-control"}) %>
+    </div>
+  </div>
+
+  
+  <div class="form-group row">
+    <%= form.label :bed_number, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-3">
+      <%= form.select(:bed_number, [1,2,3,4,5,6], {}, {class: "form-control"}) %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :guest_number, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-3">
+      <%= form.select(:guest_number, [1,2,3,4,5,6,7,8,9,10], {}, {class: "form-control"}) %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :address, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :country, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :country, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :state, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :state, class: "form-control" %>
+    </div>
+  </div>  
+  
+  <div class="form-group row">
+    <%= form.label :city, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :city, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :zipcode, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :zipcode, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :price, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :price, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :description, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-4">
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pictures %>
+    <%= form.file_field :pictures, multiple: true, class: "form-control-file" %>
+  </div>
