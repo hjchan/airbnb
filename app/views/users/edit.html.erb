@@ -37,7 +37,7 @@
   <div class="form-group row">
     <%= form.label :birthday, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-3">
-      <%= date_select :user, :birthday, {}, {class: "form-control"} %>
+      <input id="user-birthday" class="flatpickr flatpickr-input active form-control" name="user[birthday]" type="text" placeholder="<%= @user.birthday if @user.birthday %>" data-id="datetime" readonly="readonly" style="background: #fff">
     </div>
   </div>
 

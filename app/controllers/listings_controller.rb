@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
       user = User.find(params[:user_id])
       @listings = user.listings
     else
-  		@listings = Listing.all
+  		@listings = Listing.where(verify: true)
     end
 	end
 
@@ -15,6 +15,9 @@ class ListingsController < ApplicationController
 	def show
     user = User.find(params[:user_id])
 		@listing = user.listings.find(params[:id])
+    @reservation = @listing.reservations.new
+    reservations = Reservation.where(listing_id: params[:id]).map{|x| {from: x.start_date, to: x.end_date.prev_day}}
+    gon.reservations = reservations
 	end
 
   # GET    /users/:user_id/listings/new(.:format)   
@@ -39,7 +42,6 @@ class ListingsController < ApplicationController
 
   # GET    /users/:user_id/listings/:id/edit(.:format)
 	def edit
-    byebug
     if signed_in? && (current_user.id == params[:user_id].to_i)
   		@listing = current_user.listings.find(params[:id])
     else
@@ -61,10 +63,14 @@ class ListingsController < ApplicationController
 
   # DELETE /users/:user_id/listings/:id(.:format)  
 	def destroy
-    @listing = current_user.listings.find(params[:id])
-		if current_user.id = @listing.user_id
+    @listing = Listing.find(params[:id])
+		if (current_user.id = @listing.user_id) || current_user.admin?
 			@listing.destroy
-			redirect_to user_listing_path(current_user, @listing)
+      if current_user.admin?
+        redirect_to admin_verify_path		 
+      else
+        redirect_to user_listing_path(current_user, @listing)
+      end
 		else
 			redirect_to root
 		end

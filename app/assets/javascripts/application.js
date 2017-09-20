@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require rails-ujs
 //= require turbolinks
+//= require flatpickr-calendar
 //= require_tree .

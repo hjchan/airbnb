@@ -1,0 +1,7 @@
+<% if @listings %>
+  <% for listing in @listings %>
+    <%= link_to listing.name, user_listing_path(listing.user, listing) %>
+    <%= button_to "approve", admin_confirm_path(listing) %>
+    <%= button_to "delete", user_listing_path(listing.user, listing), method: :delete %>
+  <% end %>
+<% end %>

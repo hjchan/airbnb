@@ -12,7 +12,7 @@ ActiveRecord::Base.transaction do
   20.times do 
     user['name'] = Faker::Name
     user['email'] = Faker::Internet.email
-    user['gender'] = ['Male','Female'][rand(2)]
+    user['gender'] = ['Male','Female'].sample
     user['phone'] = Faker::PhoneNumber.phone_number
     user['country'] = Faker::Address.country
     user['birthday'] = Faker::Date.between(50.years.ago, Date.today)

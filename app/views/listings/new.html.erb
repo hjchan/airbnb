@@ -1,5 +1,5 @@
 <h2>New Listing</h2>
-<%= form_for @listing, html: {multipart: true} do |form| %>
+<%= form_for [current_user, @listing], html: {multipart: true} do |form| %>
 
   <%= render partial: '/listings/form', object: form %>
 

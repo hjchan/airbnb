@@ -1,9 +1,19 @@
+<%= form_for [@listing, @reservation] do |f| %>
+
+  <input id="reservation-date" class="flatpickr flatpickr-input active" name="reservation[date]" type="text" placeholder="<%= Date.today %>" data-id="datetime" readonly="readonly">
+  <div class="submit-field">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
 <p><%= @listing.name %></p>
 <% if @listing.pictures? %>
   <% for item in @listing.pictures %>
     <%= image_tag(item) %>
   <% end %>
 <% end %>
+<%= "Verify" if @listing.verify? %>
 <% if current_user.id == @listing.user_id %>
   <%= link_to 'Update', edit_user_listing_path(current_user, @listing), {class: "btn btn-primary"} %>
   <%= link_to 'Destroy', user_listing_path(current_user, @listing),

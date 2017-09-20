@@ -17,8 +17,8 @@ class UsersController < Clearance::UsersController
   end
 
   def update
-    u_params = params[:user]
-    u_params[:birthday] = Date.new(u_params["birthday(1i)"].to_i, u_params["birthday(2i)"].to_i, u_params["birthday(3i)"].to_i)
+    # u_params = params[:user]
+    # u_params[:birthday] = Date.new(u_params["birthday(1i)"].to_i, u_params["birthday(2i)"].to_i, u_params["birthday(3i)"].to_i)
     current_user.update_attributes!(update_from_params)
     redirect_to user_path(current_user)
   end
@@ -51,6 +51,7 @@ class UsersController < Clearance::UsersController
 
   def check_user
     unless current_user.id == params[:id].to_i
+      flash[:notice] = "You are not authorise!"
       redirect_to root_path
     end
   end
