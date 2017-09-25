@@ -37,6 +37,7 @@ class ReservationsController < ApplicationController
      )
     if result.success?
       reservation.update(paid_status: true)
+      ReservationJob.perform_later(current_user, reservation.listing.user, params[:id])
       redirect_to :root, :flash => { :success => "Transaction successful!" }
     else
       redirect_to :root, :flash => { :error => "Transaction failed. Please try again." }

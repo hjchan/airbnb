@@ -41,6 +41,7 @@ gem 'faker'
 gem 'kaminari'
 gem 'gon'
 gem 'braintree'
+gem 'sidekiq' 
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-flatpickr-calendar'
