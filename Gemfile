@@ -42,6 +42,8 @@ gem 'kaminari'
 gem 'gon'
 gem 'braintree'
 gem 'sidekiq' 
+gem 'rails_12factor' # Heroku Gem Supports
+
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-flatpickr-calendar'
