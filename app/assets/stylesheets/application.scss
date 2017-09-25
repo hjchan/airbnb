@@ -1,6 +1,22 @@
-@import 'bootstrap';
 @import 'flatpickr-calendar';
+@import 'braintree';
+
+
+body {
+	padding-top: 70px;
+}
+
+.dropdown-right{
+	left: initial;
+	right: 0;
+}
 
 #image-edit {
 	height: 200px;
+}
+
+.picture-thumbnail{
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
 }

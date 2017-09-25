@@ -13,6 +13,12 @@ Rails.application.routes.draw do
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
     resources :listings
+    resources :reservations, only: [:index] do
+      member do
+        get 'payment'
+        post 'checkout'
+      end
+    end
   end
 
   get '/admin' => "admin#show", as: "admin"

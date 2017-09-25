@@ -33,8 +33,6 @@ gem "clearance"
 gem "figaro"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'bootstrap', '~> 4.0.0.beta'
-gem 'jquery-rails'
 gem 'omniauth-facebook'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
@@ -42,6 +40,7 @@ gem "fog-aws"
 gem 'faker'
 gem 'kaminari'
 gem 'gon'
+gem 'braintree'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-flatpickr-calendar'

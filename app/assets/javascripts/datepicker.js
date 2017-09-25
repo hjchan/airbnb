@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function(){
 	// 		EndDate.open();
 	// 	}
 	// });
-	const EndDate = flatpickr('#reservation-date',{
+	flatpickr('#reservation-date',{
 		minDate: "today",
 		disable: gon.reservations,
 		mode: "range"	
